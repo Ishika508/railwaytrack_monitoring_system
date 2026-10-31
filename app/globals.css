@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 242 245 251;
+  --surface: 255 255 255;
+  --surface2: 243 246 252;
+  --border: 226 232 242;
+  --ink: 15 23 42;
+  --muted: 100 116 139;
+  --primary: 67 97 238;
+  --accent: 6 182 212;
+  --ok: 22 163 74;
+  --warn: 217 119 6;
+  --bad: 220 38 38;
+  --info: 37 99 235;
+  --shadow: 0 1px 2px rgb(15 23 42 / .04), 0 10px 28px -14px rgb(30 41 90 / .18);
+  color-scheme: light;
+}
+.dark {
+  --bg: 6 10 20;
+  --surface: 13 19 34;
+  --surface2: 19 27 46;
+  --border: 32 43 68;
+  --ink: 233 239 251;
+  --muted: 136 152 184;
+  --primary: 129 140 248;
+  --accent: 34 211 238;
+  --ok: 52 211 153;
+  --warn: 251 191 36;
+  --bad: 248 113 113;
+  --info: 96 165 250;
+  --shadow: 0 0 0 1px rgb(255 255 255 / .02), 0 12px 32px -16px rgb(0 0 0 / .7);
+  color-scheme: dark;
+}
+
+html, body { height: 100%; }
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+  background-image:
+    radial-gradient(900px 500px at 85% -10%, rgb(var(--primary) / .08), transparent 60%),
+    radial-gradient(700px 420px at -5% 105%, rgb(var(--accent) / .06), transparent 60%);
+  background-attachment: fixed;
+}
+* { scrollbar-width: thin; scrollbar-color: rgb(var(--border)) transparent; }
+::selection { background: rgb(var(--primary) / .25); }
+
+@layer components {
+  .card { @apply rounded-2xl border border-border bg-surface; box-shadow: var(--shadow); }
+  .card-title { @apply text-[15px] font-semibold tracking-tight; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none; }
+  .btn-primary { @apply btn text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:brightness-110; background: linear-gradient(135deg, rgb(var(--primary)), rgb(var(--info))); }
+  .dark .btn-primary { @apply text-[#0b1020]; background: linear-gradient(135deg, rgb(var(--primary)), rgb(var(--accent))); }
+  .btn-ghost { @apply btn border border-border bg-surface text-ink hover:bg-surface2; }
+  .btn-sm { @apply px-3 py-1.5 text-xs rounded-lg; }
+  .input { @apply w-full rounded-xl border border-border bg-surface2 px-3.5 py-2.5 text-sm text-ink outline-none transition placeholder:text-muted/70 focus:border-primary focus:ring-4 focus:ring-primary/15; }
+  .label { @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold; }
+  .glass { @apply border border-white/15 bg-black/45 text-white backdrop-blur-md; }
+  .kbd { @apply rounded-md border border-border bg-surface2 px-1.5 py-0.5 font-mono text-[10px] text-muted; }
+}
+
+.dot-live { position: relative; }
+.dot-live::after { content: ""; position: absolute; inset: 0; border-radius: 9999px; background: currentColor; animation: ping2 1.6s cubic-bezier(0,0,.2,1) infinite; }
+.grid-bg {
+  background-image: linear-gradient(rgb(var(--border) / .6) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--border) / .6) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.recharts-tooltip-wrapper { outline: none; }
+@media print {
+  aside, header, .no-print { display: none !important; }
+  body { background: #fff !important; }
+}
