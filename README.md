@@ -56,6 +56,13 @@ alerts still come from the simulator until your model reports detections (see be
 Browsers block `http://` device calls from an `https://` page, so run the dashboard locally
 (`npm run dev`) while testing with the Radxa.
 
+The complete Radxa/LoRa stack from the ITMS integration is organized under
+[`hardware/`](hardware/README.md).
+It includes the edge dashboard, CPU/NPU detectors, UDP-to-LoRa alert link,
+Arduino firmware, systemd units, and model utilities. The web dashboard and
+the edge TFT dashboard are separate runtimes; the edge files do not need to be
+bundled into Next.js.
+
 ## Plugging in your model
 
 - **Live detections:** `lib/sim.ts` → `stepSim()` creates events. Replace that with detections
@@ -69,7 +76,7 @@ Browsers block `http://` device calls from an `https://` page, so run the dashbo
 app/            routes (setup, connect, (app)/* pages)
 components/     Shell (nav), TrackCanvas (top-view renderer), maps, charts, cards
 lib/            store, simulator, journeys data, defect metadata, canvas rendering
-hardware/       radxa_server.py reference server
+hardware/       Radxa bridge, edge runtime, firmware, services, and tools
 ```
 
 Add or edit journeys in `lib/journeys.ts`. Tune simulation speed, defect frequency and the

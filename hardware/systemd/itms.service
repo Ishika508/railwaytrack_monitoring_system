@@ -1,0 +1,16 @@
+[Unit]
+Description=ITMS dashboard
+After=local-fs.target sysinit.target
+
+[Service]
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+ExecStartPre=/bin/sleep 2
+WorkingDirectory=/opt/trackguard/hardware/edge
+ExecStart=/usr/bin/python3 -u /opt/trackguard/hardware/edge/dashboard.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/trackguard-dashboard.log
+StandardError=append:/var/log/trackguard-dashboard.log
+
+[Install]
+WantedBy=multi-user.target

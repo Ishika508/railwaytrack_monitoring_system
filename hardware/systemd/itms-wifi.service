@@ -1,0 +1,10 @@
+[Unit]
+Description=Keep Radxa joined to ITMS-NODE
+After=NetworkManager.service
+
+[Service]
+ExecStart=/bin/bash -c 'while true; do [ "$(nmcli -g GENERAL.STATE con show ITMS-NODE)" = activated ] || nmcli con up ITMS-NODE; sleep 15; done'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
